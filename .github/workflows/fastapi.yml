@@ -35,7 +35,7 @@ jobs:
           echo "Available files:"
           ls -l
 
-          response=$(curl -s -X POST "http://localhost:8000/weather-stats?column=temperature" \
+          response=$(curl -s -X POST "http://localhost:8000/weather-stats?column=temp_c" \
             -H "accept: application/json" \
             -H "Content-Type: multipart/form-data" \
             -F "file=@weather.csv")
