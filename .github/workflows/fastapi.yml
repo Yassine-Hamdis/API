@@ -43,4 +43,4 @@ jobs:
           echo "Response from /weather-stats:"
           echo "$response"
 
-          echo "$response" | grep '"column":"temperature"' || (echo "❌ Test failed" && exit 1)
+          echo "$response" | grep '"column":"temp_c"' || (echo "❌ Test failed" && exit 1)
