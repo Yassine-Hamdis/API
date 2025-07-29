@@ -46,6 +46,14 @@ jobs:
           echo "$response" | grep '"column":"temp_c"' || (echo "❌ Test failed" && exit 1)
 
 
+      - name: 🔍 Debug file listing
+        run: |
+          echo "Current directory:"
+          pwd
+          echo "Listing files:"
+          ls -la
+
+
       - name: 🧪 Test /weather-summary PDF endpoint
         run: |
           echo "Testing /weather-summary endpoint..."
@@ -62,4 +70,3 @@ jobs:
             echo "❌ PDF summary test failed: summary.pdf not created or is empty."
             exit 1
           fi
-          
