@@ -28,8 +28,16 @@ jobs:
       - name: Run FastAPI app in background
         run: |
           nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
-          sleep 5  # give the server time to start
+          sleep 5
 
-      - name: Test FastAPI is running
+      - name: Test /weather-stats endpoint
         run: |
-          curl -X POST "http://localhost:8000/pdf-summary" || echo "Server not responding"
+          response=$(curl -s -X POST "http://localhost:8000/weather-stats?column=temperature" \
+            -H "accept: application/json" \
+            -H "Content-Type: multipart/form-data" \
+            -F "file=@sample_weather.csv")
+          
+          echo "Response from /weather-stats:"
+          echo "$response"
+
+          echo "$response" | grep '"column":"temperature"' || (echo "❌ Test failed" && exit 1)
