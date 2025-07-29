@@ -62,3 +62,4 @@ jobs:
             echo "❌ PDF summary test failed: summary.pdf not created or is empty."
             exit 1
           fi
+          
