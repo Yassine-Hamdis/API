@@ -44,3 +44,21 @@ jobs:
           echo "$response"
 
           echo "$response" | grep '"column":"temp_c"' || (echo "❌ Test failed" && exit 1)
+
+
+      - name: 🧪 Test /weather-summary PDF endpoint
+        run: |
+          echo "Testing /weather-summary endpoint..."
+
+          summary_response=$(curl -s -X POST "http://localhost:8000/weather-summary" \
+            -H "accept: application/pdf" \
+            -H "Content-Type: multipart/form-data" \
+            -F "file=@pdftest.csv" \
+            --output summary.pdf)
+
+          if [[ -f "summary.pdf" && -s "summary.pdf" ]]; then
+            echo "✅ PDF summary generated successfully."
+          else
+            echo "❌ PDF summary test failed: summary.pdf not created or is empty."
+            exit 1
+          fi
