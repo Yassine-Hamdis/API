@@ -61,7 +61,7 @@ jobs:
           summary_response=$(curl -s -X POST "http://localhost:8000/weather-summary" \
             -H "accept: application/pdf" \
             -H "Content-Type: multipart/form-data" \
-            -F "file=@pdftest.csv" \
+            -F "file=@pdftest.pdf" \
             --output summary.pdf)
 
           if [[ -f "summary.pdf" && -s "summary.pdf" ]]; then
